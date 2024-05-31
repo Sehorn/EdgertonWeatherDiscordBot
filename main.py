@@ -1,5 +1,5 @@
-import requests
 import os
+import requests
 from discord.ext import commands
 from discord import Intents
 from dotenv import load_dotenv
