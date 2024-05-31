@@ -43,7 +43,6 @@ async def weather(ctx):
         f'http://api.openweathermap.org/data/2.5/weather?q={city},{state},'
         f'{country}&appid={OPENWEATHERMAP_API_KEY}&units=imperial'
     )
-    
     try:
         response = requests.get(url, timeout=10)  # Adding a timeout of 10 seconds
         response.raise_for_status()  # Raise an exception for HTTP errors
@@ -52,7 +51,6 @@ async def weather(ctx):
         temperature = data['main']['temp']
         humidity = data['main']['humidity']
         wind_speed = data['wind']['speed']
-        
         weather_report = (
             f"🌤️ **Weather in {city}, {state}:**\n"
             f"🌡️ **Temperature:** {temperature}°F\n"
