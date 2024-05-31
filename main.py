@@ -18,18 +18,19 @@ intents = Intents.default()
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 # Event handler for when the bot is ready
+'''TODO DOCSTRING'''
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user.name}')
 
 # Command handler for !weather
+'''TODO DOCSTRING'''
 @bot.command()
 async def weather(ctx):
     city = 'Edgerton'
     state = 'KS'
     country = 'US'
     url = f'http://api.openweathermap.org/data/2.5/weather?q={city},{state},{country}&appid={OPENWEATHERMAP_API_KEY}&units=imperial'
-    
     try:
         response = requests.get(url, timeout=10)  # Adding a timeout of 10 seconds
         response.raise_for_status()  # Raise an exception for HTTP errors
@@ -38,7 +39,6 @@ async def weather(ctx):
         temperature = data['main']['temp']
         humidity = data['main']['humidity']
         wind_speed = data['wind']['speed']
-        
         weather_report = (
             f"🌤️ **Weather in {city}, {state}:**\n"
             f"🌡️ **Temperature:** {temperature}°F\n"
