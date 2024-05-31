@@ -3,11 +3,11 @@ This is a Discord bot that fetches real-time weather information for Edgerton, K
 and reports it to a Discord server.
 """
 
+import os
 import requests
 from discord.ext import commands
 from discord import Intents
 from dotenv import load_dotenv
-import os
 
 # Load environment variables from .env file
 load_dotenv()
