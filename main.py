@@ -18,7 +18,7 @@ OPENWEATHERMAP_API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
 
 # Enable the required intents
 intents = Intents.default()
-intents.message_content = True #pylint: disable=assigning-non-slot
+Intents.message_content = True #pylint: disable=assigning-non-slot
 
 # Create the bot instance with the specified intents
 bot = commands.Bot(command_prefix='!', intents=intents)
