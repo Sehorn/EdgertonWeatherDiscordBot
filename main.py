@@ -58,8 +58,7 @@ async def weather(ctx):
             f"🌡️ **Temperature:** {temperature}°F\n"
             f"💧 **Humidity:** {humidity}%\n"
             f"🌬️ **Wind Speed:** {wind_speed} mph\n"
-            f"📝 **Description:** {weather_description}\n\n"
-            f"‼️ [Tune in to Ryan Hall for urgent weather reports and seek shelter in Adam's basement if Wind Speed is dangerous!](https://www.youtube.com/@RyanHallYall) ‼️"
+            f"📝 **Description:** {weather_description}\n"
         )
         await ctx.send(weather_report)
     except requests.exceptions.RequestException as e:
