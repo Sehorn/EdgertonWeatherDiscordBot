@@ -22,11 +22,6 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
     print(f'Logged in as {bot.user.name}')
 
-# Command handler for !bothi
-@bot.command()
-async def bothi(ctx):
-    await ctx.send('Hello Guys!')
-
 # Command handler for !weather
 @bot.command()
 async def weather(ctx):
@@ -35,8 +30,9 @@ async def weather(ctx):
     country = 'US'
     url = f'http://api.openweathermap.org/data/2.5/weather?q={city},{state},{country}&appid={OPENWEATHERMAP_API_KEY}&units=imperial'
     
-    response = requests.get(url)
-    if response.status_code == 200:
+    try:
+        response = requests.get(url, timeout=10)  # Adding a timeout of 10 seconds
+        response.raise_for_status()  # Raise an exception for HTTP errors
         data = response.json()
         weather_description = data['weather'][0]['description']
         temperature = data['main']['temp']
@@ -44,16 +40,16 @@ async def weather(ctx):
         wind_speed = data['wind']['speed']
         
         weather_report = (
-            f"**Weather in {city}, {state}:**\n"
-            f"Description: {weather_description}\n"
-            f"Temperature: {temperature}°F\n"
-            f"Humidity: {humidity}%\n"
-            f"Wind Speed: {wind_speed} mph\n\n"
+            f"🌤️ **Weather in {city}, {state}:**\n"
+            f"🌡️ **Temperature:** {temperature}°F\n"
+            f"💧 **Humidity:** {humidity}%\n"
+            f"🌬️ **Wind Speed:** {wind_speed} mph\n"
+            f"📝 **Description:** {weather_description}\n\n"
             f"‼️ [Tune in to Ryan Hall for urgent weather reports and seek shelter in Adam's basement if Wind Speed is dangerous!](https://www.youtube.com/@RyanHallYall) ‼️"
         )
         await ctx.send(weather_report)
-    else:
-        await ctx.send('Failed to get the weather data. Please try again later.')
+    except requests.exceptions.RequestException as e:
+        await ctx.send(f'Failed to get the weather data: {e}')
 
 # Run the bot with your token
 bot.run(DISCORD_BOT_TOKEN)
