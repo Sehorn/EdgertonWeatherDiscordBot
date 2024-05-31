@@ -1,8 +1,8 @@
 import requests
+import os
 from discord.ext import commands
 from discord import Intents
 from dotenv import load_dotenv
-import os
 
 # Load environment variables from .env file
 load_dotenv()
